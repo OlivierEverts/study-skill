@@ -22,14 +22,16 @@ class MyFirstSkill(MycroftSkill):
         if blocks == 1:
             minutes = 25
             futuretime = now + timedelta(minutes = minutes)
+            futuretime = futuretime.strftime("%H:%M")
             self.speak_dialog('skill.studytime', data={'currenttime': currenttime,
-                                                         'blocks': blocks,
+                                                         'blocks': str(blocks),
                                                          'futuretime': futuretime})
         if blocks > 1:
             minutes = blocks*25 + (blocks-1)*5
             futuretime = now + timedelta(minutes = minutes)
+            futuretime = futuretime.strftime("%H:%M")
             self.speak_dialog('skill.studytime', data={'currenttime': currenttime,
-                                                         'blocks': blocks,
+                                                         'blocks': str(blocks),
                                                          'futuretime': futuretime})
         
 #The time.sleep() function  takes an input of seconds. So if  you want the code to sleep for several minutes you should multiply the values  witth  60
