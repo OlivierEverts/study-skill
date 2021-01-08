@@ -22,13 +22,13 @@ class MyFirstSkill(MycroftSkill):
         if blocks == 1:
             minutes = 25
             futuretime = now + timedelta(minutes = minutes)
-            self.speak_dialog('skill.currenttime', data={'currenttime': currenttime,
+            self.speak_dialog('skill.studytime', data={'currenttime': currenttime,
                                                          'blocks': blocks,
                                                          'futuretime': futuretime})
         if blocks > 1:
             minutes = blocks*25 + (blocks-1)*5
             futuretime = now + timedelta(minutes = minutes)
-            self.speak_dialog('skill.currenttime', data={'currenttime': currenttime,
+            self.speak_dialog('skill.studytime', data={'currenttime': currenttime,
                                                          'blocks': blocks,
                                                          'futuretime': futuretime})
         
