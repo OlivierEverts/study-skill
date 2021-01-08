@@ -2,6 +2,7 @@ import time
 from datetime import datetime, timedelta
 from mycroft import MycroftSkill, intent_handler
 from mycroft.util.parse import extract_duration
+from mycroft.util.time import now_local
 
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
@@ -28,7 +29,7 @@ class MyFirstSkill(MycroftSkill):
             amount_of_blocks = "{} blocks".format(str(blocks))
             
         # Get the current time to calculate the time when the user will be done in the future
-        now = datetime.now()
+        now = now_local()
         currenttime = now.strftime("%H:%M")
         
         # Calculate the time when the user is done based on the amount of blocks selected
