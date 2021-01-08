@@ -15,7 +15,7 @@ class MyFirstSkill(MycroftSkill):
 # To convert  blocks to an int, itt first needs to be a  string. The variable must be of time int for us to be able to put it into a range for the  loop
         now = datetime.now()
         currenttime = now.strftime("%H:%M")
-        self.speak_dialog('skill.currenttime.dialog', {'currenttime': currenttime})
+        self.speak_dialog('skill.currenttime', {'currenttime': currenttime})
         
         blocks = str(blocks)
         blocks = int(blocks)
