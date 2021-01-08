@@ -1,2 +1,3 @@
-Okay {time} blocks, the 25 minutes start now.
-{time} blocks it is, lets start!
+You have chosen to study for {amount_of_blocks}. The current time is {currenttime}. 
+Since each block is 25 minutes and every break between blocks is 5 minutes your study session will end at {futuretime}. 
+Good luck! Your first block starts now. 
