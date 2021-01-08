@@ -12,6 +12,19 @@ class MyFirstSkill(MycroftSkill):
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
         
+        # Give a welcome message to the user
+        self.speak_dialog('skill.welcome')
+        
+        # Get the tasks the user wants to accomplish
+        task1 = self.get_response('skill.task1')
+        
+        another_task = self.ask_yesno('skill.another.task')
+        if another_task == "yes":
+            task2 = self.get_response('skill.task2')
+        elif another_task == "no":
+            self.speak_dialog('skill.moveon')
+            
+        
         # Get the amount of blocks from the user
         blocks = self.get_response('skill.study')
         
@@ -45,8 +58,10 @@ class MyFirstSkill(MycroftSkill):
                                                             'amount_of_blocks': amount_of_blocks,
                                                             'futuretime': futuretime})
 
-#The time.sleep() function  takes an input of seconds. So if  you want the code to sleep for several minutes you should multiply the values  witth  60
-#Currently everythting is in second for debugging purposes
+        
+        # The time.sleep() function takes an input of seconds. 
+        # If you want the code to sleep for several minutes you should multiply the values with 60
+        # Currently everythting is in second for debugging purposes
         for i in range(blocks):
             time.sleep(25)
             if i <  blocks-1:
