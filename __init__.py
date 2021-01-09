@@ -40,7 +40,7 @@ class MyFirstSkill(MycroftSkill):
         if len(tasks) == 1:
             number_of_tasks = "1 task"
         if len(tasks) > 1:
-            number_of_tasks = "{} tasks".format(len(number_of_tasks))
+            number_of_tasks = "{} tasks".format(len(tasks))
 
         self.speak_dialog('tasks.confirmation.dialog', data={"number_of_tasks": number_of_tasks})
 
