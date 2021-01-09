@@ -28,7 +28,7 @@ class MyFirstSkill(MycroftSkill):
         else:
             self.speak_dialog('skill.could.not.understand')
 
-        last_task = self.ask_yesno('tasks.last.task.dialog')
+        last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
             tasks.append(task3)
