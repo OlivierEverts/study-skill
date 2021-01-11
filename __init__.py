@@ -42,7 +42,7 @@ class MyFirstSkill(MycroftSkill):
         if len(tasks) > 1:
             number_of_tasks = "{} tasks".format(len(tasks))
 
-        self.speak_dialog('tasks.confirmation.dialog', data={"number_of_tasks": number_of_tasks})
+        self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
 
         # Get the amount of blocks from the user
         blocks = self.get_response('blocks.amount.of.blocks')
