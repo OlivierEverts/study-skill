@@ -7,6 +7,7 @@ from mycroft.util.time import now_local
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
+        self.tasknames = ['task one', 'task two', 'task three']
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
@@ -14,11 +15,13 @@ class MyFirstSkill(MycroftSkill):
         # Give a welcome message to the user
         self.speak_dialog('skill.welcome')
         
-        # Get the tasks the user wants to accomplish
+        # Get the first task the user wants to accomplish
         tasks = []
         task1 = self.get_response('tasks.task1')
+        self.speak_dialog('tasks.task1.confirmation', data={"task1": task1})
         tasks.append(task1)
-        
+
+        # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
@@ -28,6 +31,7 @@ class MyFirstSkill(MycroftSkill):
         else:
             self.speak_dialog('skill.could.not.understand')
 
+        # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
@@ -90,6 +94,25 @@ class MyFirstSkill(MycroftSkill):
             if i == blocks-1:
                 break
         self.speak_dialog('study.end')
+
+    @intent_handler('tasks.change.task.intent')
+    def change_task(self, message):
+        selection = self.ask_selection(self.tasknames, 'tasks.what.task')
+
+        if selection == 'task one':
+            task1 = self.get_response('tasks.change.task', data={"selection": selection})
+            self.speak_dialog('tasks.task1.confirmation', data={"task1": task1})
+
+        if selection == 'task two':
+            task2 = self.get_response('tasks.change.task', data={"selection": selection})
+            self.speak_dialog('tasks.task2.confirmation', data={"task2": task2})
+
+        if selection == 'task three':
+            task3 = self.get_response('tasks.change.task', data={"selection": selection})
+            self.speak_dialog('tasks.task3.confirmation', data={"task3": task3})
+
+
+
 
 
 
