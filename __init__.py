@@ -1,7 +1,7 @@
 import time
 from datetime import datetime, timedelta
 from mycroft import MycroftSkill, intent_handler
-from mycroft.util.parse import extract_duration
+from mycroft.util.parse import extract_number
 from mycroft.util.time import now_local
 
 class MyFirstSkill(MycroftSkill):
@@ -23,23 +23,25 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
+        while another_task != 'yes' and another_task != 'no':
+            self.speak_dialog('tasks.task.could.not.understand')
+            another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
             tasks.append(task2)
         elif another_task == "no":
             self.speak_dialog('tasks.moveon')
-        else:
-            self.speak_dialog('skill.could.not.understand')
 
         # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
+        while last_task != 'yes' and last_task != 'no':
+            self.speak_dialog('tasks.task.could.not.understand')
+            last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
             tasks.append(task3)
         elif last_task == "no":
             self.speak_dialog('tasks.moveon')
-        else:
-            self.speak_dialog('skill.could.not.understand')
 
         if len(tasks) == 1:
             number_of_tasks = "1 task"
@@ -49,12 +51,15 @@ class MyFirstSkill(MycroftSkill):
         self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
 
         # Get the amount of blocks from the user
-        blocks = self.get_response('blocks.amount.of.blocks')
+        blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
+        while not blocks:
+            self.speak_dialog('blocks.could.not.understand')
+            blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         
         # To convert  blocks to an int, it first needs to be a string. 
         # The variable must be of type int for further use
-        blocks = str(blocks)
-        blocks = int(blocks)
+         # blocks = str(blocks)
+         # blocks = int(blocks)
         
         # If the user selects one block, Mycroft responds with the singular "block" 
         if blocks == 1:
